@@ -1,0 +1,4 @@
+smack
+=====
+
+Smack MVP - Django
