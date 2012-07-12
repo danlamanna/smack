@@ -1,0 +1,16 @@
+{% extends "base.djhtml" %}
+
+{% block title %}Signup{% endblock %}
+
+{% block content %}
+<h2>Signup to Smack</h2>
+
+<form class="well" action="" method="POST">
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit" class="btn">Signup</button>
+</form>
+
+{% endblock %}

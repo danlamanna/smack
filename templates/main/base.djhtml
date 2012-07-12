@@ -1,0 +1,82 @@
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{% block title %}Welcome{% endblock %} | Smack</title>
+
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="{{ STATIC_PREFIX }}css/bootstrap-responsive.css" type="text/css" media="screen" />
+
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_PREFIX }}js/bootstrap.js"></script>
+
+{% block head %}{% endblock %}
+</head>
+
+  <body>
+    <section id="navbar">
+    <div class="navbar">
+      <div class="navbar-inner">
+	<div class="container" style="width:1170px;">
+	  <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+	  <a class="brand" href="#">Smack</a>
+	  <div class="nav-collapse">
+          <ul class="nav">
+            <li class="active"><a href="#">Project Dashboard</a></li>
+            <li><a href="#">Tickets</a></li>
+            <li><a href="#">Milestones</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Work <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">View All Tickets</a></li>
+                <li><a href="#">View Accountable Milestones</a></li>
+                <li class="divider"></li>
+                <li class="nav-header">My Tickets</li>
+                <li><a href="#">Get a UI already</a></li>
+                <li><a href="#">Some Other Ticket</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-search pull-left" action="">
+            <input type="text" class="search-query span2" placeholder="Search">
+          </form>
+          <ul class="nav pull-right">
+	    {% if user.is_authenticated %}
+              <li><a href="#">Welcome - {{ user.username }}</a></li>
+	    {% else %}
+	      <li><a href="/login">Sign in</a></li>
+	    {% endif %}
+
+            <li class="divider-vertical"></li>
+            <li class="dropdown">
+
+	      
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+	      
+              <ul class="dropdown-menu">
+                <li><a href="#">Workspace</a></li>
+                <li><a href="#">All Workspaces</a></li>
+                <li class="divider"></li>
+                <li><a href="/logout">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+	</div>
+      </div>
+    </div>
+    </section>
+    
+    <div class="container">
+      {% block message %}{% if request.session.message != "" %} {{ request.session.message }} {% endif %}{% endblock %}
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
